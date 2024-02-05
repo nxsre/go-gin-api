@@ -1,17 +1,17 @@
 package router
 
 import (
-	"github.com/xinliangnote/go-gin-api/internal/pkg/core"
-	"github.com/xinliangnote/go-gin-api/internal/render/admin"
-	"github.com/xinliangnote/go-gin-api/internal/render/authorized"
-	"github.com/xinliangnote/go-gin-api/internal/render/config"
-	"github.com/xinliangnote/go-gin-api/internal/render/cron"
-	"github.com/xinliangnote/go-gin-api/internal/render/dashboard"
-	"github.com/xinliangnote/go-gin-api/internal/render/generator"
-	"github.com/xinliangnote/go-gin-api/internal/render/index"
-	"github.com/xinliangnote/go-gin-api/internal/render/install"
-	"github.com/xinliangnote/go-gin-api/internal/render/tool"
-	"github.com/xinliangnote/go-gin-api/internal/render/upgrade"
+	"github.com/nxsre/go-gin-api/internal/pkg/core"
+	"github.com/nxsre/go-gin-api/internal/render/admin"
+	"github.com/nxsre/go-gin-api/internal/render/authorized"
+	"github.com/nxsre/go-gin-api/internal/render/config"
+	"github.com/nxsre/go-gin-api/internal/render/cron"
+	"github.com/nxsre/go-gin-api/internal/render/dashboard"
+	generator_handler "github.com/nxsre/go-gin-api/internal/render/generator"
+	"github.com/nxsre/go-gin-api/internal/render/index"
+	"github.com/nxsre/go-gin-api/internal/render/install"
+	"github.com/nxsre/go-gin-api/internal/render/tool"
+	"github.com/nxsre/go-gin-api/internal/render/upgrade"
 )
 
 func setRenderRouter(r *resource) {

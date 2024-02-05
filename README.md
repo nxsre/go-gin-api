@@ -28,8 +28,8 @@
 
 ## 文档索引（可加入交流群）
 
-- 中文文档：[go-gin-api - 语雀](https://www.yuque.com/xinliangnote/go-gin-api/ngc3x5)
-- English Document：[en.md](https://github.com/xinliangnote/go-gin-api/blob/master/en.md)
+- 中文文档：[go-gin-api - 语雀](https://www.yuque.com/nxsre/go-gin-api/ngc3x5)
+- English Document：[en.md](https://github.com/nxsre/go-gin-api/blob/master/en.md)
 
 
 
@@ -50,7 +50,7 @@ go run github.com/99designs/gqlgen
 ```
 #### 错误处理
 ```text
-generating core failed: unable to load github.com/xinliangnote/go-gin-api/internal/graph/model - make sure you're using an import path to a package that exists
+generating core failed: unable to load github.com/nxsre/go-gin-api/internal/graph/model - make sure you're using an import path to a package that exists
 ```
 #### 修改 gqlgen.yml 重新运行 gqlgen
 ```shell
@@ -61,7 +61,7 @@ vi gqlgen.yml
 # gqlgen will search for any type names in the schema in these go packages
 # if they match it will use them, otherwise it will generate them.
 #autobind:
-#   - "github.com/xinliangnote/go-gin-api/internal/graph/model"
+#   - "github.com/nxsre/go-gin-api/internal/graph/model"
 ...
 ```
 ```go
@@ -70,9 +70,9 @@ go run github.com/99designs/gqlgen
 
 ## 其他
 
-查看 Jaeger 链路追踪 Demo 代码，请查看 [v1.0 版](https://github.com/xinliangnote/go-gin-api/releases/tag/v1.0) ，链接地址：http://127.0.0.1:9999/jaeger_test
+查看 Jaeger 链路追踪 Demo 代码，请查看 [v1.0 版](https://github.com/nxsre/go-gin-api/releases/tag/v1.0) ，链接地址：http://127.0.0.1:9999/jaeger_test
 
-调用的其他服务端 Demo 代码为 [https://github.com/xinliangnote/go-jaeger-demo](https://github.com/xinliangnote/go-jaeger-demo)
+调用的其他服务端 Demo 代码为 [https://github.com/nxsre/go-jaeger-demo](https://github.com/nxsre/go-jaeger-demo)
 
 ## 联系作者
 

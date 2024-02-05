@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/xinliangnote/go-gin-api/pkg/trace"
+	"github.com/nxsre/go-gin-api/pkg/trace"
 )
 
 type Option func(*option)

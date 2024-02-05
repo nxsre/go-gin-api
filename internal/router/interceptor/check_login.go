@@ -4,12 +4,12 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/xinliangnote/go-gin-api/configs"
-	"github.com/xinliangnote/go-gin-api/internal/code"
-	"github.com/xinliangnote/go-gin-api/internal/pkg/core"
-	"github.com/xinliangnote/go-gin-api/internal/proposal"
-	"github.com/xinliangnote/go-gin-api/internal/repository/redis"
-	"github.com/xinliangnote/go-gin-api/pkg/errors"
+	"github.com/nxsre/go-gin-api/configs"
+	"github.com/nxsre/go-gin-api/internal/code"
+	"github.com/nxsre/go-gin-api/internal/pkg/core"
+	"github.com/nxsre/go-gin-api/internal/proposal"
+	"github.com/nxsre/go-gin-api/internal/repository/redis"
+	"github.com/nxsre/go-gin-api/pkg/errors"
 )
 
 func (i *interceptor) CheckLogin(ctx core.Context) (sessionUserInfo proposal.SessionUserInfo, err core.BusinessError) {

@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/xinliangnote/go-gin-api/internal/code"
-	"github.com/xinliangnote/go-gin-api/internal/pkg/core"
+	"github.com/nxsre/go-gin-api/internal/code"
+	"github.com/nxsre/go-gin-api/internal/pkg/core"
 
 	"github.com/spf13/cast"
 )

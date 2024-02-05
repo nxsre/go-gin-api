@@ -1,10 +1,10 @@
 package alert
 
 import (
-	"github.com/xinliangnote/go-gin-api/configs"
-	"github.com/xinliangnote/go-gin-api/internal/proposal"
-	"github.com/xinliangnote/go-gin-api/pkg/errors"
-	"github.com/xinliangnote/go-gin-api/pkg/mail"
+	"github.com/nxsre/go-gin-api/configs"
+	"github.com/nxsre/go-gin-api/internal/proposal"
+	"github.com/nxsre/go-gin-api/pkg/errors"
+	"github.com/nxsre/go-gin-api/pkg/mail"
 
 	"go.uber.org/zap"
 )

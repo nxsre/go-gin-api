@@ -1,9 +1,9 @@
 package authorized
 
 import (
-	"github.com/xinliangnote/go-gin-api/internal/pkg/core"
-	"github.com/xinliangnote/go-gin-api/internal/repository/mysql"
-	"github.com/xinliangnote/go-gin-api/internal/repository/mysql/authorized"
+	"github.com/nxsre/go-gin-api/internal/pkg/core"
+	"github.com/nxsre/go-gin-api/internal/repository/mysql"
+	"github.com/nxsre/go-gin-api/internal/repository/mysql/authorized"
 )
 
 func (s *service) Detail(ctx core.Context, id int32) (info *authorized.Authorized, err error) {

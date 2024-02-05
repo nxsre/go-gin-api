@@ -1,10 +1,10 @@
 package admin
 
 import (
-	"github.com/xinliangnote/go-gin-api/internal/pkg/core"
-	"github.com/xinliangnote/go-gin-api/internal/repository/mysql"
-	"github.com/xinliangnote/go-gin-api/internal/repository/mysql/admin_menu"
-	"github.com/xinliangnote/go-gin-api/internal/repository/mysql/menu"
+	"github.com/nxsre/go-gin-api/internal/pkg/core"
+	"github.com/nxsre/go-gin-api/internal/repository/mysql"
+	"github.com/nxsre/go-gin-api/internal/repository/mysql/admin_menu"
+	"github.com/nxsre/go-gin-api/internal/repository/mysql/menu"
 )
 
 type SearchListMenuData struct {

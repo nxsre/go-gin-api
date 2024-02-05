@@ -1,4 +1,4 @@
-module github.com/xinliangnote/go-gin-api
+module github.com/nxsre/go-gin-api
 
 go 1.21.3
 

@@ -1,9 +1,9 @@
 package authorized
 
 import (
-	"github.com/xinliangnote/go-gin-api/internal/pkg/core"
-	"github.com/xinliangnote/go-gin-api/internal/repository/mysql"
-	"github.com/xinliangnote/go-gin-api/internal/repository/mysql/authorized_api"
+	"github.com/nxsre/go-gin-api/internal/pkg/core"
+	"github.com/nxsre/go-gin-api/internal/repository/mysql"
+	"github.com/nxsre/go-gin-api/internal/repository/mysql/authorized_api"
 )
 
 type SearchAPIData struct {

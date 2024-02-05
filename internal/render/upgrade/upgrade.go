@@ -1,8 +1,8 @@
 package upgrade
 
 import (
-	"github.com/xinliangnote/go-gin-api/internal/repository/mysql"
-	"github.com/xinliangnote/go-gin-api/internal/repository/redis"
+	"github.com/nxsre/go-gin-api/internal/repository/mysql"
+	"github.com/nxsre/go-gin-api/internal/repository/redis"
 
 	"go.uber.org/zap"
 )

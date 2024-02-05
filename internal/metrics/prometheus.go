@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	namespace = "xinliangnote"
+	namespace = "nxsre"
 	subsystem = "go_gin_api"
 )
 

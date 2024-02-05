@@ -1,12 +1,12 @@
 package interceptor
 
 import (
-	"github.com/xinliangnote/go-gin-api/internal/pkg/core"
-	"github.com/xinliangnote/go-gin-api/internal/proposal"
-	"github.com/xinliangnote/go-gin-api/internal/repository/mysql"
-	"github.com/xinliangnote/go-gin-api/internal/repository/redis"
-	"github.com/xinliangnote/go-gin-api/internal/services/admin"
-	"github.com/xinliangnote/go-gin-api/internal/services/authorized"
+	"github.com/nxsre/go-gin-api/internal/pkg/core"
+	"github.com/nxsre/go-gin-api/internal/proposal"
+	"github.com/nxsre/go-gin-api/internal/repository/mysql"
+	"github.com/nxsre/go-gin-api/internal/repository/redis"
+	"github.com/nxsre/go-gin-api/internal/services/admin"
+	"github.com/nxsre/go-gin-api/internal/services/authorized"
 
 	"go.uber.org/zap"
 )

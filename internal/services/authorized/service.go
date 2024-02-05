@@ -1,11 +1,11 @@
 package authorized
 
 import (
-	"github.com/xinliangnote/go-gin-api/internal/pkg/core"
-	"github.com/xinliangnote/go-gin-api/internal/repository/mysql"
-	"github.com/xinliangnote/go-gin-api/internal/repository/mysql/authorized"
-	"github.com/xinliangnote/go-gin-api/internal/repository/mysql/authorized_api"
-	"github.com/xinliangnote/go-gin-api/internal/repository/redis"
+	"github.com/nxsre/go-gin-api/internal/pkg/core"
+	"github.com/nxsre/go-gin-api/internal/repository/mysql"
+	"github.com/nxsre/go-gin-api/internal/repository/mysql/authorized"
+	"github.com/nxsre/go-gin-api/internal/repository/mysql/authorized_api"
+	"github.com/nxsre/go-gin-api/internal/repository/redis"
 )
 
 var _ Service = (*service)(nil)

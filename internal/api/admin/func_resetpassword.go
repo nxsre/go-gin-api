@@ -3,8 +3,8 @@ package admin
 import (
 	"net/http"
 
-	"github.com/xinliangnote/go-gin-api/internal/code"
-	"github.com/xinliangnote/go-gin-api/internal/pkg/core"
+	"github.com/nxsre/go-gin-api/internal/code"
+	"github.com/nxsre/go-gin-api/internal/pkg/core"
 )
 
 type resetPasswordRequest struct {

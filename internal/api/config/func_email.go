@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/xinliangnote/go-gin-api/configs"
-	"github.com/xinliangnote/go-gin-api/internal/code"
-	"github.com/xinliangnote/go-gin-api/internal/pkg/core"
-	"github.com/xinliangnote/go-gin-api/pkg/env"
-	"github.com/xinliangnote/go-gin-api/pkg/mail"
+	"github.com/nxsre/go-gin-api/configs"
+	"github.com/nxsre/go-gin-api/internal/code"
+	"github.com/nxsre/go-gin-api/internal/pkg/core"
+	"github.com/nxsre/go-gin-api/pkg/env"
+	"github.com/nxsre/go-gin-api/pkg/mail"
 
 	"github.com/spf13/cast"
 	"github.com/spf13/viper"

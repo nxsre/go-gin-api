@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/xinliangnote/go-gin-api/pkg/errors"
-	"github.com/xinliangnote/go-gin-api/pkg/timeutil"
+	"github.com/nxsre/go-gin-api/pkg/errors"
+	"github.com/nxsre/go-gin-api/pkg/timeutil"
 )
 
 // Generate

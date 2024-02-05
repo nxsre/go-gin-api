@@ -1,12 +1,12 @@
 package authorized
 
 import (
-	"github.com/xinliangnote/go-gin-api/configs"
-	"github.com/xinliangnote/go-gin-api/internal/pkg/core"
-	"github.com/xinliangnote/go-gin-api/internal/repository/mysql"
-	"github.com/xinliangnote/go-gin-api/internal/repository/redis"
-	"github.com/xinliangnote/go-gin-api/internal/services/authorized"
-	"github.com/xinliangnote/go-gin-api/pkg/hash"
+	"github.com/nxsre/go-gin-api/configs"
+	"github.com/nxsre/go-gin-api/internal/pkg/core"
+	"github.com/nxsre/go-gin-api/internal/repository/mysql"
+	"github.com/nxsre/go-gin-api/internal/repository/redis"
+	"github.com/nxsre/go-gin-api/internal/services/authorized"
+	"github.com/nxsre/go-gin-api/pkg/hash"
 
 	"go.uber.org/zap"
 )

@@ -3,10 +3,10 @@ package cron
 import (
 	"sync"
 
-	"github.com/xinliangnote/go-gin-api/internal/repository/mysql"
-	"github.com/xinliangnote/go-gin-api/internal/repository/mysql/cron_task"
-	"github.com/xinliangnote/go-gin-api/internal/repository/redis"
-	"github.com/xinliangnote/go-gin-api/pkg/errors"
+	"github.com/nxsre/go-gin-api/internal/repository/mysql"
+	"github.com/nxsre/go-gin-api/internal/repository/mysql/cron_task"
+	"github.com/nxsre/go-gin-api/internal/repository/redis"
+	"github.com/nxsre/go-gin-api/pkg/errors"
 
 	"github.com/jakecoffman/cron"
 	"go.uber.org/zap"
