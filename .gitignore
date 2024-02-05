@@ -5,6 +5,8 @@
 *.so
 *.dylib
 *.idea
+go-gin-api
+INSTALL.lock
 
 # Test binary, built with `go test -c`
 *.test
