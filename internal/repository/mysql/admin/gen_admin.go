@@ -105,7 +105,7 @@ func (qb *adminQueryBuilder) QueryOne(db *gorm.DB) (*Admin, error) {
 
 func (qb *adminQueryBuilder) QueryAll(db *gorm.DB) ([]*Admin, error) {
 	var ret []*Admin
-	err := qb.buildQuery(db).Find(&ret).Error
+	err := qb.buildQuery(db).Limit(-1).Find(&ret).Error
 	return ret, err
 }
 

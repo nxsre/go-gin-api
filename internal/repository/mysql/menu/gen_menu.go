@@ -105,7 +105,7 @@ func (qb *menuQueryBuilder) QueryOne(db *gorm.DB) (*Menu, error) {
 
 func (qb *menuQueryBuilder) QueryAll(db *gorm.DB) ([]*Menu, error) {
 	var ret []*Menu
-	err := qb.buildQuery(db).Find(&ret).Error
+	err := qb.buildQuery(db).Limit(-1).Find(&ret).Error
 	return ret, err
 }
 

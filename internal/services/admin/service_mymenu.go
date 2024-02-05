@@ -28,6 +28,7 @@ func (s *service) MyMenu(ctx core.Context, searchData *SearchMyMenuData) (menuDa
 	adminMenuListData, err := adminMenuQb.
 		OrderById(false).
 		QueryAll(s.db.GetDbR().WithContext(ctx.RequestContext()))
+
 	if err != nil {
 		return nil, err
 	}
@@ -41,6 +42,7 @@ func (s *service) MyMenu(ctx core.Context, searchData *SearchMyMenuData) (menuDa
 	menuListData, err := menuQb.
 		OrderBySort(true).
 		QueryAll(s.db.GetDbR().WithContext(ctx.RequestContext()))
+
 	if err != nil {
 		return nil, err
 	}

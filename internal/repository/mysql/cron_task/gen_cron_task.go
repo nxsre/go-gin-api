@@ -105,7 +105,7 @@ func (qb *cronTaskQueryBuilder) QueryOne(db *gorm.DB) (*CronTask, error) {
 
 func (qb *cronTaskQueryBuilder) QueryAll(db *gorm.DB) ([]*CronTask, error) {
 	var ret []*CronTask
-	err := qb.buildQuery(db).Find(&ret).Error
+	err := qb.buildQuery(db).Limit(-1).Find(&ret).Error
 	return ret, err
 }
 

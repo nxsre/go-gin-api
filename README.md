@@ -31,6 +31,14 @@
 - 中文文档：[go-gin-api - 语雀](https://www.yuque.com/xinliangnote/go-gin-api/ngc3x5)
 - English Document：[en.md](https://github.com/xinliangnote/go-gin-api/blob/master/en.md)
 
+```mysql
+create database go_gin_api;
+
+create user 'root'@'127.0.0.1' identified by '123456';
+
+grant create,select,insert,update,delete on go_gin_api.* to 'root'@'127.0.0.1';
+```
+
 ## 轻量版
 
 为了满足开发者对于简单、轻量级 API 框架的需求，开发了 gin-api-mono，旨在提供更便捷的业务开发体验。

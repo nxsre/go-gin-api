@@ -105,7 +105,7 @@ func (qb *authorizedQueryBuilder) QueryOne(db *gorm.DB) (*Authorized, error) {
 
 func (qb *authorizedQueryBuilder) QueryAll(db *gorm.DB) ([]*Authorized, error) {
 	var ret []*Authorized
-	err := qb.buildQuery(db).Find(&ret).Error
+	err := qb.buildQuery(db).Limit(-1).Find(&ret).Error
 	return ret, err
 }
 

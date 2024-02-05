@@ -24,7 +24,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	cors "github.com/rs/cors/wrapper/gin"
 	ginSwagger "github.com/swaggo/gin-swagger"
-	"github.com/swaggo/gin-swagger/swaggerFiles"
+        swaggerFiles "github.com/swaggo/files"
 	"go.uber.org/multierr"
 	"go.uber.org/zap"
 	"golang.org/x/time/rate"
