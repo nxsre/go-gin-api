@@ -78,7 +78,7 @@ func (qb *menuQueryBuilder) Delete(db *gorm.DB) (err error) {
 
 func (qb *menuQueryBuilder) Count(db *gorm.DB) (int64, error) {
 	var c int64
-	res := qb.buildQuery(db).Model(&Menu{}).Count(&c)
+	res := qb.buildQuery(db).Model(&Menu{}).Limit(1).Count(&c)
 	if res.Error != nil && res.Error == gorm.ErrRecordNotFound {
 		c = 0
 	}

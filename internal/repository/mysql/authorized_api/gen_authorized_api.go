@@ -78,7 +78,7 @@ func (qb *authorizedApiQueryBuilder) Delete(db *gorm.DB) (err error) {
 
 func (qb *authorizedApiQueryBuilder) Count(db *gorm.DB) (int64, error) {
 	var c int64
-	res := qb.buildQuery(db).Model(&AuthorizedApi{}).Count(&c)
+	res := qb.buildQuery(db).Model(&AuthorizedApi{}).Limit(1).Count(&c)
 	if res.Error != nil && res.Error == gorm.ErrRecordNotFound {
 		c = 0
 	}

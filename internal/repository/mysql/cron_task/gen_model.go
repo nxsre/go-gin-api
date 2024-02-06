@@ -1,16 +1,22 @@
 package cron_task
 
-import "time"
+import (
+	"time"
+)
 
 // CronTask 后台任务表
+//
 //go:generate gormgen -structs CronTask -input .
 type CronTask struct {
-	Id                  int32     // 主键
-	Name                string    // 任务名称
-	Spec                string    // crontab 表达式
-	Command             string    // 执行命令
-	Protocol            int32     // 执行方式 1:shell 2:http
-	HttpMethod          int32     // http 请求方式 1:get 2:post
+	Id                  int32  // 主键
+	Name                string // 任务名称
+	EntryID             int    // 任务ID
+	Spec                string // crontab 表达式
+	Command             string // 执行命令
+	Protocol            int32  // 执行方式 1:shell 2:http
+	HttpMethod          int32  // http 请求方式 1:get 2:post
+	ReqURL              string
+	ReqBody             string
 	Timeout             int32     // 超时时间(单位:秒)
 	RetryTimes          int32     // 重试次数
 	RetryInterval       int32     // 重试间隔(单位:秒)

@@ -5,11 +5,10 @@ import (
 	"errors"
 	"fmt"
 	"go/format"
-	"io/ioutil"
+	"gorm.io/gorm/schema"
 	"log"
+	"os"
 	"strings"
-
-	"github.com/jinzhu/gorm"
 )
 
 // fieldConfig
@@ -61,7 +60,7 @@ func NewGenerator(outputFile string) *Generator {
 // ParserAST parse by go file
 func (g *Generator) ParserAST(p *Parser, structs []string) (ret *Generator) {
 	for _, v := range structs {
-		g.buf[gorm.ToDBName(v)] = new(bytes.Buffer)
+		g.buf[schema.NamingStrategy{SingularTable: true}.TableName(v)] = new(bytes.Buffer)
 	}
 	g.structConfigs = p.Parse()
 	g.config.PkgName = p.pkg.Name
@@ -90,10 +89,10 @@ func (g *Generator) Generate() *Generator {
 	}
 
 	for _, v := range g.structConfigs {
-		if _, ok := g.buf[gorm.ToDBName(v.StructName)]; !ok {
+		if _, ok := g.buf[schema.NamingStrategy{SingularTable: true}.TableName(v.StructName)]; !ok {
 			continue
 		}
-		if err := outputTemplate.Execute(g.buf[gorm.ToDBName(v.StructName)], v); err != nil {
+		if err := outputTemplate.Execute(g.buf[schema.NamingStrategy{SingularTable: true}.TableName(v.StructName)], v); err != nil {
 			panic(err)
 		}
 	}
@@ -117,7 +116,7 @@ func (g *Generator) Format() *Generator {
 func (g *Generator) Flush() error {
 	for k := range g.buf {
 		filename := g.inputFile + "/gen_" + strings.ToLower(k) + ".go"
-		if err := ioutil.WriteFile(filename, g.buf[k].Bytes(), 0777); err != nil {
+		if err := os.WriteFile(filename, g.buf[k].Bytes(), 0777); err != nil {
 			log.Fatalln(err)
 		}
 		fmt.Println("  └── file : ", fmt.Sprintf("%s_repo/gen_%s.go", strings.ToLower(k), strings.ToLower(k)))

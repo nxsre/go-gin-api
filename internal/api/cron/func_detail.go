@@ -16,11 +16,13 @@ type detailRequest struct {
 }
 
 type detailResponse struct {
-	Name                string `json:"name"`                  // 任务名称
-	Spec                string `json:"spec"`                  // crontab 表达式
-	Command             string `json:"command"`               // 执行命令
-	Protocol            int32  `json:"protocol"`              // 执行方式 1:shell 2:http
-	HttpMethod          int32  `json:"http_method"`           // http 请求方式 1:get 2:post
+	Name                string `json:"name"`        // 任务名称
+	Spec                string `json:"spec"`        // crontab 表达式
+	Command             string `json:"command"`     // 执行命令
+	Protocol            int32  `json:"protocol"`    // 执行方式 1:shell 2:http
+	HttpMethod          int32  `json:"http_method"` // http 请求方式 1:get 2:post
+	ReqURL              string `json:"req_url"`
+	ReqBody             string `json:"req_body"`
 	Timeout             int32  `json:"timeout"`               // 超时时间(单位:秒)
 	RetryTimes          int32  `json:"retry_times"`           // 重试次数
 	RetryInterval       int32  `json:"retry_interval"`        // 重试间隔(单位:秒)
@@ -84,6 +86,8 @@ func (h *handler) Detail() core.HandlerFunc {
 		res.Command = info.Command
 		res.Protocol = info.Protocol
 		res.HttpMethod = info.HttpMethod
+		res.ReqURL = info.ReqURL
+		res.ReqBody = info.ReqBody
 		res.Timeout = info.Timeout
 		res.RetryTimes = info.RetryTimes
 		res.RetryInterval = info.RetryInterval

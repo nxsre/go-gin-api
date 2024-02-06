@@ -8,7 +8,7 @@ import (
 	"github.com/nxsre/go-gin-api/internal/repository/redis"
 	"github.com/nxsre/go-gin-api/pkg/errors"
 
-	"github.com/jakecoffman/cron"
+	"github.com/robfig/cron/v3"
 	"go.uber.org/zap"
 )
 
@@ -58,10 +58,10 @@ type Server interface {
 	Stop()
 
 	// AddTask 增加定时任务
-	AddTask(task *cron_task.CronTask)
+	AddTask(task *cron_task.CronTask) (cron.EntryID, error)
 
 	// RemoveTask 删除定时任务
-	RemoveTask(taskId int)
+	RemoveTask(taskId cron.EntryID)
 
 	// AddJob 增加定时任务执行的工作内容
 	AddJob(task *cron_task.CronTask) cron.FuncJob
@@ -84,7 +84,7 @@ func New(logger *zap.Logger, db mysql.Repo, cache redis.Repo) (Server, error) {
 		logger: logger,
 		db:     db,
 		cache:  cache,
-		cron:   cron.New(),
+		cron:   cron.New(cron.WithSeconds()),
 		taskCount: &taskCount{
 			wg:   sync.WaitGroup{},
 			exit: make(chan struct{}),

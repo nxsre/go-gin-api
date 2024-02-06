@@ -10,12 +10,15 @@ import (
 )
 
 type modifyRequest struct {
-	Id                  string `form:"id" binding:"required"`             // 任务ID
-	Name                string `form:"name" binding:"required"`           // 任务名称
-	Spec                string `form:"spec" binding:"required"`           // crontab 表达式
-	Command             string `form:"command" binding:"required"`        // 执行命令
-	Protocol            int32  `form:"protocol" binding:"required"`       // 执行方式 1:shell 2:http
-	HttpMethod          int32  `form:"http_method"`                       // http 请求方式 1:get 2:post
+	Id                  string `form:"id" binding:"required"`       // 任务ID
+	Name                string `form:"name" binding:"required"`     // 任务名称
+	Spec                string `form:"spec" binding:"required"`     // crontab 表达式
+	Command             string `form:"command"`                     // 执行命令
+	Protocol            int32  `form:"protocol" binding:"required"` // 执行方式 1:shell 2:http
+	HttpMethod          int32  `form:"http_method"`                 // http 请求方式 1:get 2:post
+	ReqURL              string `form:"req_url"`
+	ReqBody             string `form:"req_body"`
+	HttpAgent           string `form:"http_agent"`
 	Timeout             int32  `form:"timeout" binding:"required"`        // 超时时间(单位:秒)
 	RetryTimes          int32  `form:"retry_times" binding:"required"`    // 重试次数
 	RetryInterval       int32  `form:"retry_interval" binding:"required"` // 重试间隔(单位:秒)
@@ -87,6 +90,8 @@ func (h *handler) Modify() core.HandlerFunc {
 		modifyData.Command = req.Command
 		modifyData.Protocol = req.Protocol
 		modifyData.HttpMethod = req.HttpMethod
+		modifyData.ReqURL = req.ReqURL
+		modifyData.ReqBody = req.ReqBody
 		modifyData.Timeout = req.Timeout
 		modifyData.RetryTimes = req.RetryTimes
 		modifyData.RetryInterval = req.RetryInterval

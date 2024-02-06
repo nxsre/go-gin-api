@@ -3,6 +3,10 @@ package admin
 import "time"
 
 // Admin 管理员表
+// github.com/olongfen/gormgen/cmd/gormgen
+// gormgen -structs Admin -input . -imports gorm.io/gorm -transformErr true
+// github.com/MohamedBassem/gormgen/cmd/gormgen@master
+//
 //go:generate gormgen -structs Admin -input .
 type Admin struct {
 	Id          int32     // 主键

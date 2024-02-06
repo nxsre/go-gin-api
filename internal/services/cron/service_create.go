@@ -40,12 +40,16 @@ func (s *service) Create(ctx core.Context, createData *CreateCronTaskData) (id i
 	model.IsUsed = createData.IsUsed
 	model.CreatedUser = ctx.SessionUserInfo().UserName
 
+	entryID, err := s.cronServer.AddTask(model)
+	if err != nil {
+		return 0, err
+	}
+	model.EntryID = int(entryID)
+
 	id, err = model.Create(s.db.GetDbW().WithContext(ctx.RequestContext()))
 	if err != nil {
 		return 0, err
 	}
-
-	s.cronServer.AddTask(model)
 
 	return
 }

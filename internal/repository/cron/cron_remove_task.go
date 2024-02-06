@@ -1,8 +1,7 @@
 package cron
 
-import "github.com/spf13/cast"
+import "github.com/robfig/cron/v3"
 
-func (s *server) RemoveTask(taskId int) {
-	name := cast.ToString(taskId)
-	s.cron.RemoveJob(name)
+func (s *server) RemoveTask(taskId cron.EntryID) {
+	s.cron.Remove(taskId)
 }

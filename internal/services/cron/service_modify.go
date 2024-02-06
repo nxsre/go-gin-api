@@ -4,8 +4,8 @@ import (
 	"github.com/nxsre/go-gin-api/internal/pkg/core"
 	"github.com/nxsre/go-gin-api/internal/repository/mysql"
 	"github.com/nxsre/go-gin-api/internal/repository/mysql/cron_task"
-
-	"github.com/spf13/cast"
+	"github.com/robfig/cron/v3"
+	"log"
 )
 
 type ModifyCronTaskData struct {
@@ -14,6 +14,8 @@ type ModifyCronTaskData struct {
 	Command             string // 执行命令
 	Protocol            int32  // 执行方式 1:shell 2:http
 	HttpMethod          int32  // http 请求方式 1:get 2:post
+	ReqURL              string
+	ReqBody             string
 	Timeout             int32  // 超时时间(单位:秒)
 	RetryTimes          int32  // 重试次数
 	RetryInterval       int32  // 重试间隔(单位:秒)
@@ -32,6 +34,8 @@ func (s *service) Modify(ctx core.Context, id int32, modifyData *ModifyCronTaskD
 		"command":               modifyData.Command,
 		"protocol":              modifyData.Protocol,
 		"http_method":           modifyData.HttpMethod,
+		"req_url":               modifyData.ReqURL,
+		"req_body":              modifyData.ReqBody,
 		"timeout":               modifyData.Timeout,
 		"retry_times":           modifyData.RetryTimes,
 		"retry_interval":        modifyData.RetryInterval,
@@ -52,18 +56,25 @@ func (s *service) Modify(ctx core.Context, id int32, modifyData *ModifyCronTaskD
 	}
 
 	// region 操作定时任务 避免主从同步延迟，在这需要查询主库
-	if modifyData.IsUsed == cron_task.IsUsedNo {
-		s.cronServer.RemoveTask(cast.ToInt(id))
-	} else {
-		qb = cron_task.NewQueryBuilder()
-		qb.WhereId(mysql.EqualPredicate, id)
-		info, err := qb.QueryOne(s.db.GetDbW().WithContext(ctx.RequestContext()))
+	qb = cron_task.NewQueryBuilder()
+	qb.WhereId(mysql.EqualPredicate, id)
+	info, err := qb.QueryOne(s.db.GetDbW().WithContext(ctx.RequestContext()))
+	if err != nil {
+		return err
+	}
+	s.cronServer.RemoveTask(cron.EntryID(info.EntryID))
+
+	if modifyData.IsUsed != cron_task.IsUsedNo {
+		entryID, err := s.cronServer.AddTask(info)
 		if err != nil {
 			return err
 		}
-
-		s.cronServer.RemoveTask(cast.ToInt(id))
-		s.cronServer.AddTask(info)
+		qb = cron_task.NewQueryBuilder()
+		qb.WhereId(mysql.EqualPredicate, id)
+		if qb.Updates(s.db.GetDbW(), map[string]interface{}{"entry_id": entryID}) != nil {
+			log.Println("更新失败，删除任务")
+			s.cronServer.RemoveTask(entryID)
+		}
 	}
 	// endregion
 

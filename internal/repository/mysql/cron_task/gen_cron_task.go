@@ -78,7 +78,7 @@ func (qb *cronTaskQueryBuilder) Delete(db *gorm.DB) (err error) {
 
 func (qb *cronTaskQueryBuilder) Count(db *gorm.DB) (int64, error) {
 	var c int64
-	res := qb.buildQuery(db).Model(&CronTask{}).Count(&c)
+	res := qb.buildQuery(db).Model(&CronTask{}).Limit(1).Count(&c)
 	if res.Error != nil && res.Error == gorm.ErrRecordNotFound {
 		c = 0
 	}
@@ -202,6 +202,49 @@ func (qb *cronTaskQueryBuilder) OrderByName(asc bool) *cronTaskQueryBuilder {
 	}
 
 	qb.order = append(qb.order, "name "+order)
+	return qb
+}
+
+func (qb *cronTaskQueryBuilder) WhereEntryID(p mysql.Predicate, value int) *cronTaskQueryBuilder {
+	qb.where = append(qb.where, struct {
+		prefix string
+		value  interface{}
+	}{
+		fmt.Sprintf("%v %v ?", "entry_id", p),
+		value,
+	})
+	return qb
+}
+
+func (qb *cronTaskQueryBuilder) WhereEntryIDIn(value []int) *cronTaskQueryBuilder {
+	qb.where = append(qb.where, struct {
+		prefix string
+		value  interface{}
+	}{
+		fmt.Sprintf("%v %v ?", "entry_id", "IN"),
+		value,
+	})
+	return qb
+}
+
+func (qb *cronTaskQueryBuilder) WhereEntryIDNotIn(value []int) *cronTaskQueryBuilder {
+	qb.where = append(qb.where, struct {
+		prefix string
+		value  interface{}
+	}{
+		fmt.Sprintf("%v %v ?", "entry_id", "NOT IN"),
+		value,
+	})
+	return qb
+}
+
+func (qb *cronTaskQueryBuilder) OrderByEntryID(asc bool) *cronTaskQueryBuilder {
+	order := "DESC"
+	if asc {
+		order = "ASC"
+	}
+
+	qb.order = append(qb.order, "entry_id "+order)
 	return qb
 }
 

@@ -16,6 +16,7 @@ func (s *server) Start() {
 
 	qb := cron_task.NewQueryBuilder()
 	qb.WhereIsUsed(mysql.EqualPredicate, cron_task.IsUsedYES)
+
 	totalNum, err := qb.Count(s.db.GetDbR())
 	if err != nil {
 		s.logger.Fatal("cron initialize tasks count err", zap.Error(err))
@@ -39,9 +40,18 @@ func (s *server) Start() {
 			s.logger.Fatal("cron initialize tasks list err", zap.Error(err))
 		}
 
+		s.logger.Info("listData", zap.String("listData", fmt.Sprint(listData)))
 		for _, item := range listData {
-			s.AddTask(item)
+			entryID, err := s.AddTask(item)
+			if err != nil {
+				continue
+			}
 			taskNum++
+			qb = cron_task.NewQueryBuilder()
+			qb.WhereId(mysql.EqualPredicate, item.Id)
+			if err := qb.Updates(s.db.GetDbW(), map[string]interface{}{"entry_id": entryID}); err != nil {
+				s.RemoveTask(entryID)
+			}
 		}
 	}
 

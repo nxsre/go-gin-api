@@ -41,6 +41,11 @@
                                 <option value="1">GET</option>
                                 <option value="2">POST</option>
                             </select>
+                            <label for="req_url">请输入 URL</label>
+                            <input  type="text" class="form-control maxlength" maxlength="128"  id="req_url" placeholder="">
+
+                            <label for="req_body" class="req_body">请输入 BODY</label>
+                            <textarea type="text" class="form-control maxlength req_body" maxlength="250" rows="2"  id="req_body"></textarea>
                         </div>
 
                         <div class="form-group">
@@ -49,7 +54,7 @@
                                    placeholder="请输入任务表达式，例如：*/5 * * * *">
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group command">
                             <label for="command">命令</label>
                             <textarea class="form-control maxlength" maxlength="250" rows="2" id="command"
                                       placeholder="请输入任务表达式，例如：/usr/local/bin/php /data/web/artisan consoleCommand"></textarea>
@@ -156,9 +161,20 @@
         $("#protocol").change(function () {
             if ($(this).val() === "2") {
                 $(".http_method").show();
+                $("#command").val("");
+                $(".command").hide();
             } else {
                 $("#http_method").val(0);
                 $(".http_method").hide();
+                $(".command").show();
+            }
+        })
+
+        $("#http_method").change(function () {
+            if ($(this).val() === "1") {
+                $(".req_body").hide();
+            }else{
+                $(".req_body").show();
             }
         })
 
@@ -214,7 +230,18 @@
                     $(".http_method").hide();
                 }
 
+                if (data.protocol === 2) {
+                    if (data.http_method === 1) {
+                        $(".req_body").hide();
+                    }else{
+                        $(".req_body").show();
+                    }
+                    $(".command").hide();
+                }
+
                 $("#http_method").val(data.http_method);
+                $("#req_url").val(data.req_url);
+                $("#req_body").val(data.req_body);
                 $("#spec").val(data.spec);
                 $("#command").val(data.command);
                 $("#timeout").val(data.timeout);
@@ -297,6 +324,8 @@
                 command: command,
                 protocol: $("#protocol").val(),
                 http_method: $("#http_method").val(),
+                req_url: $("#req_url").val(),
+                req_body: $("#req_body").val(),
                 timeout: $("#timeout").val(),
                 retry_times: $("#retry_times").val(),
                 retry_interval: $("#retry_interval").val(),
@@ -317,6 +346,8 @@
                     $("#btnLoading").show();
                 },
                 function (data) {
+                    console.log(postData);
+                    console.log(data);
                     $("#btnLoading").hide();
                     $("#btnOk").show();
 

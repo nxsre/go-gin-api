@@ -1,6 +1,7 @@
 package cron
 
 import (
+	"github.com/pingcap/log"
 	"net/http"
 
 	"github.com/nxsre/go-gin-api/internal/code"
@@ -56,6 +57,7 @@ func (h *handler) UpdateUsed() core.HandlerFunc {
 
 		err = h.cronService.UpdateUsed(ctx, id, req.Used)
 		if err != nil {
+			log.Error(err.Error())
 			ctx.AbortWithError(core.Error(
 				http.StatusBadRequest,
 				code.AdminUpdateError,

@@ -92,7 +92,7 @@ func (qb *{{.QueryBuilderName}}) Delete(db *gorm.DB) (err error) {
 
 func (qb *{{.QueryBuilderName}}) Count(db *gorm.DB) (int64, error) {
 	var c int64
-	res := qb.buildQuery(db).Model(&{{.StructName}}{}).Count(&c)
+	res := qb.buildQuery(db).Model(&{{.StructName}}{}).Limit(1).Count(&c)
 	if res.Error != nil && res.Error == gorm.ErrRecordNotFound {
 		c = 0
 	}
@@ -119,7 +119,7 @@ func (qb *{{.QueryBuilderName}}) QueryOne(db *gorm.DB) (*{{.StructName}}, error)
 
 func (qb *{{.QueryBuilderName}}) QueryAll(db *gorm.DB) ([]*{{.StructName}}, error) {
 	var ret []*{{.StructName}}
-	err := qb.buildQuery(db).Find(&ret).Error
+	err := qb.buildQuery(db).Limit(-1).Find(&ret).Error
 	return ret, err
 }
 
