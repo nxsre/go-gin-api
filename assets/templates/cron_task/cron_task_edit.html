@@ -103,6 +103,12 @@
                                    placeholder="请输入邮箱地址">
                         </div>
 
+                        <div class="form-group notify_webhook_addr">
+                            <label for="notify_webhook_addr">webhook 地址(多个用,分割)</label>
+                            <input type="text" class="form-control maxlength" maxlength="255" id="notify_webhook_addr"
+                                   placeholder="请输入 webhook 地址">
+                        </div>
+
                         <div class="form-group notify_keyword">
                             <label for="notify_keyword">匹配关键字(多个用,分割)</label>
                             <input type="text" class="form-control maxlength" maxlength="255" id="notify_keyword"
@@ -153,6 +159,9 @@
 
         const hash_id = {{ .HashID }}
 
+        $(".notify_receiver_email").hide();
+        $(".notify_webhook_addr").hide();
+
         $(".maxlength").maxlength({
             warningClass: "badge badge-info",
             limitReachedClass: "badge badge-warning"
@@ -181,9 +190,10 @@
         $("#notify_status").change(function () {
             if ($(this).val() === "1") {
                 $(".notify_type").hide();
-                $("#notify_type").val(0)
                 $(".notify_receiver_email").hide();
                 $("#notify_receiver_email").val("");
+                $(".notify_webhook_addr").hide();
+                $("#notify_webhook_addr").val("");
                 $(".notify_keyword").hide();
                 $("#notify_keyword").val("");
             } else if($(this).val() === "2" || $(this).val() === "3") {
@@ -193,9 +203,13 @@
 
                 if (("#notify_type").val() === "1") {
                     $(".notify_receiver_email").show();
+                    $(".notify_webhook_addr").hide();
+                }else if(("#notify_type").val() === "2"){
+                    $(".notify_receiver_email").hide();
+                    $(".notify_webhook_addr").show();
                 } else {
                     $(".notify_receiver_email").hide();
-                    $("#notify_receiver_email").val("");
+                    $(".notify_webhook_addr").hide();
                 }
             } else if($(this).val() === "4") {
                 $(".notify_type").show();
@@ -203,9 +217,13 @@
 
                 if (("#notify_type").val() === "1") {
                     $(".notify_receiver_email").show();
+                    $(".notify_webhook_addr").hide();
+                }else if(("#notify_type").val() === "2"){
+                    $(".notify_receiver_email").hide();
+                    $(".notify_webhook_addr").show();
                 } else {
                     $(".notify_receiver_email").hide();
-                    $("#notify_receiver_email").val("");
+                    $(".notify_webhook_addr").hide();
                 }
             }
         });
@@ -213,8 +231,13 @@
         $("#notify_type").change(function (){
             if ($(this).val() === "1") {
                 $(".notify_receiver_email").show();
+                $(".notify_webhook_addr").hide();
+            } else if ($(this).val() === "2") {
+                $(".notify_webhook_addr").show();
+                $(".notify_receiver_email").hide();
             } else {
                 $(".notify_receiver_email").hide();
+                $(".notify_webhook_addr").hide();
             }
         });
 
@@ -251,6 +274,7 @@
                 if (data.notify_status === 1) {
                     $(".notify_type").hide();
                     $(".notify_receiver_email").hide();
+                    $(".notify_webhook_addr").hide();
                     $(".notify_keyword").hide();
                 } else if (data.notify_status === 2 || data.notify_status === 3) {
                     $(".notify_type").show();
@@ -258,8 +282,13 @@
 
                     if (data.notify_type === 1) {
                         $(".notify_receiver_email").show();
+                        $(".notify_webhook_addr").hide();
+                    } else if (data.notify_type === 2) {
+                        $(".notify_webhook_addr").show();
+                        $(".notify_receiver_email").hide();
                     } else {
                         $(".notify_receiver_email").hide();
+                        $(".notify_webhook_addr").hide();
                     }
                 } else if (data.notify_status === 4) {
                     $(".notify_type").show();
@@ -267,13 +296,19 @@
 
                     if (data.notify_type === 1) {
                         $(".notify_receiver_email").show();
+                        $(".notify_webhook_addr").hide();
+                    } else if (data.notify_type === 2) {
+                        $(".notify_webhook_addr").show();
+                        $(".notify_receiver_email").hide();
                     } else {
                         $(".notify_receiver_email").hide();
+                        $(".notify_webhook_addr").hide();
                     }
                 }
 
                 $("#notify_type").val(data.notify_type);
                 $("#notify_receiver_email").val(data.notify_receiver_email);
+                $("#notify_webhook_addr").val(data.notify_webhook_addr);
                 $("#notify_keyword").val(data.notify_keyword);
                 $("input[name='is_used'][value='"+data.is_used+"']").attr("checked", true);
                 $("#remark").val(data.remark);
@@ -331,6 +366,7 @@
                 retry_interval: $("#retry_interval").val(),
                 notify_status: $("#notify_status").val(),
                 notify_type: $("#notify_type").val(),
+                notify_webhook_addr: $("#notify_webhook_addr").val(),
                 notify_receiver_email: $("#notify_receiver_email").val(),
                 notify_keyword: $("#notify_keyword").val(),
                 is_used: $("input[name='is_used']:checked").val(),

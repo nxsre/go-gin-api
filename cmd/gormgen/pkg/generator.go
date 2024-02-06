@@ -5,10 +5,11 @@ import (
 	"errors"
 	"fmt"
 	"go/format"
-	"gorm.io/gorm/schema"
 	"log"
 	"os"
 	"strings"
+
+	"gorm.io/gorm/schema"
 )
 
 // fieldConfig

@@ -23,11 +23,12 @@ type detailResponse struct {
 	HttpMethod          int32  `json:"http_method"` // http 请求方式 1:get 2:post
 	ReqURL              string `json:"req_url"`
 	ReqBody             string `json:"req_body"`
-	Timeout             int32  `json:"timeout"`               // 超时时间(单位:秒)
-	RetryTimes          int32  `json:"retry_times"`           // 重试次数
-	RetryInterval       int32  `json:"retry_interval"`        // 重试间隔(单位:秒)
-	NotifyStatus        int32  `json:"notify_status"`         // 执行结束是否通知 1:不通知 2:失败通知 3:结束通知 4:结果关键字匹配通知
-	NotifyType          int32  `json:"notify_type"`           // 通知类型 1:邮件 2:webhook
+	Timeout             int32  `json:"timeout"`        // 超时时间(单位:秒)
+	RetryTimes          int32  `json:"retry_times"`    // 重试次数
+	RetryInterval       int32  `json:"retry_interval"` // 重试间隔(单位:秒)
+	NotifyStatus        int32  `json:"notify_status"`  // 执行结束是否通知 1:不通知 2:失败通知 3:结束通知 4:结果关键字匹配通知
+	NotifyType          int32  `json:"notify_type"`    // 通知类型 1:邮件 2:webhook
+	NotifyWebhookAddr   string `json:"notify_webhook_addr"`
 	NotifyReceiverEmail string `json:"notify_receiver_email"` // 通知者邮箱地址(多个用,分割)
 	NotifyKeyword       string `json:"notify_keyword"`        // 通知匹配关键字(多个用,分割)
 	Remark              string `json:"remark"`                // 备注
@@ -93,6 +94,7 @@ func (h *handler) Detail() core.HandlerFunc {
 		res.RetryInterval = info.RetryInterval
 		res.NotifyStatus = info.NotifyStatus
 		res.NotifyType = info.NotifyType
+		res.NotifyWebhookAddr = info.NotifyWebhookAddr
 		res.NotifyReceiverEmail = info.NotifyReceiverEmail
 		res.NotifyKeyword = info.NotifyKeyword
 		res.Remark = info.Remark

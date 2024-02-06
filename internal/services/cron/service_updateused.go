@@ -1,11 +1,13 @@
 package cron
 
 import (
+	"log"
+
 	"github.com/nxsre/go-gin-api/internal/pkg/core"
 	"github.com/nxsre/go-gin-api/internal/repository/mysql"
 	"github.com/nxsre/go-gin-api/internal/repository/mysql/cron_task"
+
 	"github.com/robfig/cron/v3"
-	"log"
 )
 
 func (s *service) UpdateUsed(ctx core.Context, id int32, used int32) (err error) {

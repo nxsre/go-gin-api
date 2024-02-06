@@ -11,11 +11,14 @@ type CreateCronTaskData struct {
 	Command             string // 执行命令
 	Protocol            int32  // 执行方式 1:shell 2:http
 	HttpMethod          int32  // http 请求方式 1:get 2:post
+	ReqURL              string
+	ReqBody             string
 	Timeout             int32  // 超时时间(单位:秒)
 	RetryTimes          int32  // 重试次数
 	RetryInterval       int32  // 重试间隔(单位:秒)
 	NotifyStatus        int32  // 执行结束是否通知 1:不通知 2:失败通知 3:结束通知 4:结果关键字匹配通知
 	NotifyType          int32  // 通知类型 1:邮件 2:webhook
+	NotifyWebhookAddr   string // Webhook 通知地址
 	NotifyReceiverEmail string // 通知者邮箱地址(多个用,分割)
 	NotifyKeyword       string // 通知匹配关键字(多个用,分割)
 	Remark              string // 备注
@@ -34,6 +37,7 @@ func (s *service) Create(ctx core.Context, createData *CreateCronTaskData) (id i
 	model.RetryInterval = createData.RetryInterval
 	model.NotifyStatus = createData.NotifyStatus
 	model.NotifyType = createData.NotifyType
+	model.NotifyWebhookAddr = createData.NotifyWebhookAddr
 	model.NotifyReceiverEmail = createData.NotifyReceiverEmail
 	model.NotifyKeyword = createData.NotifyKeyword
 	model.Remark = createData.Remark

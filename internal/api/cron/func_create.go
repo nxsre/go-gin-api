@@ -10,20 +10,23 @@ import (
 )
 
 type createRequest struct {
-	Name                string `form:"name" binding:"required"`           // 任务名称
-	Spec                string `form:"spec" binding:"required"`           // crontab 表达式
-	Command             string `form:"command" binding:"required"`        // 执行命令
-	Protocol            int32  `form:"protocol" binding:"required"`       // 执行方式 1:shell 2:http
-	HttpMethod          int32  `form:"http_method"`                       // http 请求方式 1:get 2:post
+	Name                string `form:"name" binding:"required"`     // 任务名称
+	Spec                string `form:"spec" binding:"required"`     // crontab 表达式
+	Command             string `form:"command"`                     // 执行命令
+	Protocol            int32  `form:"protocol" binding:"required"` // 执行方式 1:shell 2:http
+	HttpMethod          int32  `form:"http_method"`                 // http 请求方式 1:get 2:post
+	ReqURL              string `form:"req_url"`
+	ReqBody             string `form:"req_body"`
 	Timeout             int32  `form:"timeout" binding:"required"`        // 超时时间(单位:秒)
 	RetryTimes          int32  `form:"retry_times" binding:"required"`    // 重试次数
 	RetryInterval       int32  `form:"retry_interval" binding:"required"` // 重试间隔(单位:秒)
 	NotifyStatus        int32  `form:"notify_status" binding:"required"`  // 执行结束是否通知 1:不通知 2:失败通知 3:结束通知 4:结果关键字匹配通知
 	NotifyType          int32  `form:"notify_type"`                       // 通知类型 1:邮件 2:webhook
-	NotifyReceiverEmail string `form:"notify_receiver_email"`             // 通知者邮箱地址(多个用,分割)
-	NotifyKeyword       string `form:"notify_keyword"`                    // 通知匹配关键字(多个用,分割)
-	Remark              string `form:"remark"`                            // 备注
-	IsUsed              int32  `form:"is_used" binding:"required"`        // 是否启用 1:是  -1:否
+	NotifyWebhookAddr   string `json:"notify_webhook_addr"`
+	NotifyReceiverEmail string `form:"notify_receiver_email"`      // 通知者邮箱地址(多个用,分割)
+	NotifyKeyword       string `form:"notify_keyword"`             // 通知匹配关键字(多个用,分割)
+	Remark              string `form:"remark"`                     // 备注
+	IsUsed              int32  `form:"is_used" binding:"required"` // 是否启用 1:是  -1:否
 }
 
 type createResponse struct {
@@ -73,11 +76,14 @@ func (h *handler) Create() core.HandlerFunc {
 		createData.Command = req.Command
 		createData.Protocol = req.Protocol
 		createData.HttpMethod = req.HttpMethod
+		createData.ReqURL = req.ReqURL
+		createData.ReqBody = req.ReqBody
 		createData.Timeout = req.Timeout
 		createData.RetryTimes = req.RetryTimes
 		createData.RetryInterval = req.RetryInterval
 		createData.NotifyStatus = req.NotifyStatus
 		createData.NotifyType = req.NotifyType
+		createData.NotifyWebhookAddr = req.NotifyWebhookAddr
 		createData.NotifyReceiverEmail = req.NotifyReceiverEmail
 		createData.NotifyKeyword = req.NotifyKeyword
 		createData.Remark = req.Remark

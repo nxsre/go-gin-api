@@ -41,6 +41,7 @@ func CreateCronTaskTableSql() (sql string) {
 	sql += "`notify_status` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '执行结束是否通知 1:不通知 2:失败通知 3:结束通知 4:结果关键字匹配通知',"
 	sql += "`notify_type` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '通知类型 1:邮件 2:webhook',"
 	sql += "`notify_receiver_email` varchar(255) NOT NULL DEFAULT '' COMMENT '通知者邮箱地址(多个用,分割)',"
+	sql += "`notify_webhook_addr` varchar(255) NOT NULL DEFAULT '' COMMENT 'Webhook 地址(多个用,分割)',"
 	sql += "`notify_keyword` varchar(255) NOT NULL DEFAULT '' COMMENT '通知匹配关键字(多个用,分割)',"
 	sql += "`remark` varchar(100) NOT NULL DEFAULT '' COMMENT '备注',"
 	sql += "`is_used` tinyint(1) NOT NULL DEFAULT '1' COMMENT '是否启用 1:是  -1:否',"

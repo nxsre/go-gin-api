@@ -54,7 +54,7 @@
                                    placeholder="请输入任务表达式，例如：*/5 * * * *">
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group command">
                             <label for="command">命令</label>
                             <textarea class="form-control maxlength" maxlength="250" rows="2" id="command"
                                       placeholder="请输入任务表达式，例如：/usr/local/bin/php /data/web/artisan consoleCommand"></textarea>
@@ -101,6 +101,12 @@
                             <label for="notify_receiver_email">通知者邮箱地址(多个用,分割)</label>
                             <input type="text" class="form-control maxlength" maxlength="255" id="notify_receiver_email"
                                    placeholder="请输入邮箱地址">
+                        </div>
+
+                        <div class="form-group notify_webhook_addr">
+                            <label for="notify_webhook_addr">webhook 地址(多个用,分割)</label>
+                            <input type="text" class="form-control maxlength" maxlength="255" id="notify_webhook_addr"
+                                   placeholder="请输入 webhook 地址">
                         </div>
 
                         <div class="form-group notify_keyword">
@@ -158,6 +164,7 @@
         });
 
         $(".http_method").hide();
+        $(".command").hide();
 
         $("#protocol").change(function () {
             if ($(this).val() === "2") {
@@ -166,6 +173,7 @@
             } else {
                 $("#http_method").val(0);
                 $(".http_method").hide();
+                $(".command").show();
             }
             if ($("#http_method").val() === "2") {
                 $(".req_body").show();
@@ -185,6 +193,7 @@
 
         $(".notify_type").hide();
         $(".notify_receiver_email").hide();
+        $(".notify_webhook_addr").hide();
         $(".notify_keyword").hide();
 
         $("#notify_status").change(function () {
@@ -195,6 +204,8 @@
                 $("#notify_receiver_email").val("");
                 $(".notify_keyword").hide();
                 $("#notify_keyword").val("");
+                $(".notify_webhook_addr").hide();
+                $("#notify_webhook_addr").val("");
             } else if($(this).val() === "2" || $(this).val() === "3") {
                 $(".notify_type").show();
                 $(".notify_keyword").hide();
@@ -202,6 +213,8 @@
 
                 if (("#notify_type").val() === "1") {
                     $(".notify_receiver_email").show();
+                    $(".notify_webhook_addr").hide();
+                    $("#notify_webhook_addr").val("");
                 } else {
                     $(".notify_receiver_email").hide();
                     $("#notify_receiver_email").val("");
@@ -212,9 +225,12 @@
 
                 if (("#notify_type").val() === "1") {
                     $(".notify_receiver_email").show();
+                    $(".notify_webhook_addr").hide();
+                    $("#notify_webhook_addr").val("");
                 } else {
                     $(".notify_receiver_email").hide();
                     $("#notify_receiver_email").val("");
+                    $(".notify_webhook_addr").show();
                 }
             }
         });
@@ -222,8 +238,10 @@
         $("#notify_type").change(function (){
            if ($(this).val() === "1") {
                $(".notify_receiver_email").show();
+               $(".notify_webhook_addr").hide();
            } else {
                $(".notify_receiver_email").hide();
+               $(".notify_webhook_addr").show();
            }
         });
 
@@ -274,6 +292,7 @@
                 retry_interval: $("#retry_interval").val(),
                 notify_status: $("#notify_status").val(),
                 notify_type: $("#notify_type").val(),
+                notify_webhook_addr: $("#notify_webhook_addr").val(),
                 notify_receiver_email: $("#notify_receiver_email").val(),
                 notify_keyword: $("#notify_keyword").val(),
                 is_used: $("input[name='is_used']:checked").val(),

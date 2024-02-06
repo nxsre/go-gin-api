@@ -420,6 +420,92 @@ func (qb *cronTaskQueryBuilder) OrderByHttpMethod(asc bool) *cronTaskQueryBuilde
 	return qb
 }
 
+func (qb *cronTaskQueryBuilder) WhereReqURL(p mysql.Predicate, value string) *cronTaskQueryBuilder {
+	qb.where = append(qb.where, struct {
+		prefix string
+		value  interface{}
+	}{
+		fmt.Sprintf("%v %v ?", "req_url", p),
+		value,
+	})
+	return qb
+}
+
+func (qb *cronTaskQueryBuilder) WhereReqURLIn(value []string) *cronTaskQueryBuilder {
+	qb.where = append(qb.where, struct {
+		prefix string
+		value  interface{}
+	}{
+		fmt.Sprintf("%v %v ?", "req_url", "IN"),
+		value,
+	})
+	return qb
+}
+
+func (qb *cronTaskQueryBuilder) WhereReqURLNotIn(value []string) *cronTaskQueryBuilder {
+	qb.where = append(qb.where, struct {
+		prefix string
+		value  interface{}
+	}{
+		fmt.Sprintf("%v %v ?", "req_url", "NOT IN"),
+		value,
+	})
+	return qb
+}
+
+func (qb *cronTaskQueryBuilder) OrderByReqURL(asc bool) *cronTaskQueryBuilder {
+	order := "DESC"
+	if asc {
+		order = "ASC"
+	}
+
+	qb.order = append(qb.order, "req_url "+order)
+	return qb
+}
+
+func (qb *cronTaskQueryBuilder) WhereReqBody(p mysql.Predicate, value string) *cronTaskQueryBuilder {
+	qb.where = append(qb.where, struct {
+		prefix string
+		value  interface{}
+	}{
+		fmt.Sprintf("%v %v ?", "req_body", p),
+		value,
+	})
+	return qb
+}
+
+func (qb *cronTaskQueryBuilder) WhereReqBodyIn(value []string) *cronTaskQueryBuilder {
+	qb.where = append(qb.where, struct {
+		prefix string
+		value  interface{}
+	}{
+		fmt.Sprintf("%v %v ?", "req_body", "IN"),
+		value,
+	})
+	return qb
+}
+
+func (qb *cronTaskQueryBuilder) WhereReqBodyNotIn(value []string) *cronTaskQueryBuilder {
+	qb.where = append(qb.where, struct {
+		prefix string
+		value  interface{}
+	}{
+		fmt.Sprintf("%v %v ?", "req_body", "NOT IN"),
+		value,
+	})
+	return qb
+}
+
+func (qb *cronTaskQueryBuilder) OrderByReqBody(asc bool) *cronTaskQueryBuilder {
+	order := "DESC"
+	if asc {
+		order = "ASC"
+	}
+
+	qb.order = append(qb.order, "req_body "+order)
+	return qb
+}
+
 func (qb *cronTaskQueryBuilder) WhereTimeout(p mysql.Predicate, value int32) *cronTaskQueryBuilder {
 	qb.where = append(qb.where, struct {
 		prefix string
@@ -632,6 +718,49 @@ func (qb *cronTaskQueryBuilder) OrderByNotifyType(asc bool) *cronTaskQueryBuilde
 	}
 
 	qb.order = append(qb.order, "notify_type "+order)
+	return qb
+}
+
+func (qb *cronTaskQueryBuilder) WhereNotifyWebhookAddr(p mysql.Predicate, value string) *cronTaskQueryBuilder {
+	qb.where = append(qb.where, struct {
+		prefix string
+		value  interface{}
+	}{
+		fmt.Sprintf("%v %v ?", "notify_webhook_addr", p),
+		value,
+	})
+	return qb
+}
+
+func (qb *cronTaskQueryBuilder) WhereNotifyWebhookAddrIn(value []string) *cronTaskQueryBuilder {
+	qb.where = append(qb.where, struct {
+		prefix string
+		value  interface{}
+	}{
+		fmt.Sprintf("%v %v ?", "notify_webhook_addr", "IN"),
+		value,
+	})
+	return qb
+}
+
+func (qb *cronTaskQueryBuilder) WhereNotifyWebhookAddrNotIn(value []string) *cronTaskQueryBuilder {
+	qb.where = append(qb.where, struct {
+		prefix string
+		value  interface{}
+	}{
+		fmt.Sprintf("%v %v ?", "notify_webhook_addr", "NOT IN"),
+		value,
+	})
+	return qb
+}
+
+func (qb *cronTaskQueryBuilder) OrderByNotifyWebhookAddr(asc bool) *cronTaskQueryBuilder {
+	order := "DESC"
+	if asc {
+		order = "ASC"
+	}
+
+	qb.order = append(qb.order, "notify_webhook_addr "+order)
 	return qb
 }
 

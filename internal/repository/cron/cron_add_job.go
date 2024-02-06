@@ -2,12 +2,13 @@ package cron
 
 import (
 	"fmt"
-	"go.uber.org/zap"
 	"os/exec"
 
-	"github.com/mattn/go-shellwords"
 	"github.com/nxsre/go-gin-api/internal/repository/mysql/cron_task"
+
+	"github.com/mattn/go-shellwords"
 	"github.com/robfig/cron/v3"
+	"go.uber.org/zap"
 )
 
 // AddJob 执行任务内容
@@ -42,6 +43,11 @@ func (s *server) AddJob(task *cron_task.CronTask) cron.FuncJob {
 			case cron_task.HttpMethodPost:
 				s.logger.Info(task.ReqURL, zap.String("body", task.ReqBody))
 			}
+		}
+
+		switch task.NotifyType {
+		case cron_task.NotifyTypeWebhook:
+
 		}
 		msg := fmt.Sprintf("执行任务：(%d)%s [%s]", task.Id, task.Name, task.Spec)
 		s.logger.Info(msg)

@@ -24,10 +24,11 @@ type modifyRequest struct {
 	RetryInterval       int32  `form:"retry_interval" binding:"required"` // 重试间隔(单位:秒)
 	NotifyStatus        int32  `form:"notify_status" binding:"required"`  // 执行结束是否通知 1:不通知 2:失败通知 3:结束通知 4:结果关键字匹配通知
 	NotifyType          int32  `form:"notify_type"`                       // 通知类型 1:邮件 2:webhook
-	NotifyReceiverEmail string `form:"notify_receiver_email"`             // 通知者邮箱地址(多个用,分割)
-	NotifyKeyword       string `form:"notify_keyword"`                    // 通知匹配关键字(多个用,分割)
-	Remark              string `form:"remark"`                            // 备注
-	IsUsed              int32  `form:"is_used" binding:"required"`        // 是否启用 1:是  -1:否
+	NotifyWebhookAddr   string `form:"notify_webhook_addr"`
+	NotifyReceiverEmail string `form:"notify_receiver_email"`      // 通知者邮箱地址(多个用,分割)
+	NotifyKeyword       string `form:"notify_keyword"`             // 通知匹配关键字(多个用,分割)
+	Remark              string `form:"remark"`                     // 备注
+	IsUsed              int32  `form:"is_used" binding:"required"` // 是否启用 1:是  -1:否
 }
 
 type modifyResponse struct {
@@ -51,6 +52,7 @@ type modifyResponse struct {
 // @Param retry_interval formData int true "重试间隔(单位:秒)"
 // @Param notify_status formData int true "执行结束是否通知 1:不通知 2:失败通知 3:结束通知 4:结果关键字匹配通知"
 // @Param notify_type formData int false "通知类型 1:邮件 2:webhook"
+// @Param notify_webhook_addr formData string false "webhook 地址(多个用,分割)"
 // @Param notify_receiver_email formData string false "通知者邮箱地址(多个用,分割)"
 // @Param notify_keyword formData string false "通知匹配关键字(多个用,分割)"
 // @Param remark formData string false "备注"
@@ -97,6 +99,7 @@ func (h *handler) Modify() core.HandlerFunc {
 		modifyData.RetryInterval = req.RetryInterval
 		modifyData.NotifyStatus = req.NotifyStatus
 		modifyData.NotifyType = req.NotifyType
+		modifyData.NotifyWebhookAddr = req.NotifyWebhookAddr
 		modifyData.NotifyReceiverEmail = req.NotifyReceiverEmail
 		modifyData.NotifyKeyword = req.NotifyKeyword
 		modifyData.Remark = req.Remark

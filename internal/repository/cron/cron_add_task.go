@@ -1,10 +1,11 @@
 package cron
 
 import (
-	"github.com/robfig/cron/v3"
 	"strings"
 
 	"github.com/nxsre/go-gin-api/internal/repository/mysql/cron_task"
+
+	"github.com/robfig/cron/v3"
 )
 
 func (s *server) AddTask(task *cron_task.CronTask) (cron.EntryID, error) {
