@@ -90,7 +90,7 @@
 
                         <div class="form-group notify_type">
                             <label for="notify_type">通知方式</label>
-                            <select class="form-control" id="notify_type">
+                            <select class="form-control " id="notify_type">
                                 <option value="0">请选择</option>
                                 <option value="1">邮件</option>
                                 <option value="2">webhook</option>
@@ -201,10 +201,10 @@
                 $(".notify_keyword").hide();
                 $("#notify_keyword").val("");
 
-                if (("#notify_type").val() === "1") {
+                if ($("#notify_type").val() === "1") {
                     $(".notify_receiver_email").show();
                     $(".notify_webhook_addr").hide();
-                }else if(("#notify_type").val() === "2"){
+                }else if($("#notify_type").val() === "2"){
                     $(".notify_receiver_email").hide();
                     $(".notify_webhook_addr").show();
                 } else {
@@ -215,10 +215,10 @@
                 $(".notify_type").show();
                 $(".notify_keyword").show();
 
-                if (("#notify_type").val() === "1") {
+                if ($("#notify_type").val() === "1") {
                     $(".notify_receiver_email").show();
                     $(".notify_webhook_addr").hide();
-                }else if(("#notify_type").val() === "2"){
+                }else if($("#notify_type").val() === "2"){
                     $(".notify_receiver_email").hide();
                     $(".notify_webhook_addr").show();
                 } else {
@@ -382,8 +382,6 @@
                     $("#btnLoading").show();
                 },
                 function (data) {
-                    console.log(postData);
-                    console.log(data);
                     $("#btnLoading").hide();
                     $("#btnOk").show();
 
