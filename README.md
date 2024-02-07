@@ -45,7 +45,10 @@ grant create,select,insert,update,delete on go_gin_api.* to 'root'@'127.0.0.1';
 ```
 
 ### 生成 graphql 代码
-```go
+```shell
+printf '// +build tools\npackage tools\nimport (_ "github.com/99designs/gqlgen"\n _ "github.com/99designs/gqlgen/graphql/introspection")' | gofmt > tools.go
+go run github.com/99designs/gqlgen init
+go mod tidy
 go run github.com/99designs/gqlgen
 ```
 #### 错误处理
