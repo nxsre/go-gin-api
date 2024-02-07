@@ -71,6 +71,36 @@ vi gqlgen.yml
 go run github.com/99designs/gqlgen
 ```
 
+## 目录结构
+```shell
+.
+├── assets                ## 静态资源
+│   ├── bootstrap
+│   └── templates
+├── cmd                   ## 可独立执行程序
+│   ├── ...
+├── configs               ## 配置文件
+├── deploy                ## 部署相关配置
+│   ├── loki            
+│   └── prometheus
+├── docs
+├── internal              ## 业务目录
+│   ├── api               ## api 接口
+│   ├── code              ## 错误码定义
+│   ├── graph             ## graph 接口
+│   ├── pkg               ## 内部使用的 package
+│   ├── proposal          ## 提案
+│   ├── render            ## 渲染 HTML
+│   ├── repository        ## 资源
+│   ├── router            ## 路由
+│   ├── services          ## 服务
+│   └── websocket         ## websocket 接口
+├── logs                  ## 日志目录
+├── pkg                   ## 可供外部使用的 package
+│   ├── ...
+└── scripts               ## 脚本程序
+
+```
 ## 其他
 
 查看 Jaeger 链路追踪 Demo 代码，请查看 [v1.0 版](https://github.com/nxsre/go-gin-api/releases/tag/v1.0) ，链接地址：http://127.0.0.1:9999/jaeger_test

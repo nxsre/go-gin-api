@@ -75,6 +75,9 @@ func NewHTTPServer(logger *zap.Logger, cronLogger *zap.Logger) (*Server, error) 
 		core.WithEnableRate(),
 		core.WithAlertNotify(alert.NotifyHandler(logger)),
 		core.WithRecordMetrics(metrics.RecordHandler(logger)),
+		// 关闭 pprof & swagger
+		core.WithDisablePProf(),
+		core.WithDisableSwagger(),
 	)
 
 	if err != nil {

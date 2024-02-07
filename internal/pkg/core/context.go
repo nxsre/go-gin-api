@@ -3,7 +3,7 @@ package core
 import (
 	"bytes"
 	stdctx "context"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 	"strings"
@@ -163,8 +163,8 @@ func (c *context) init() {
 		panic(err)
 	}
 
-	c.ctx.Set(_BodyName, body)                                   // cache body是为了trace使用
-	c.ctx.Request.Body = ioutil.NopCloser(bytes.NewBuffer(body)) // re-construct req body
+	c.ctx.Set(_BodyName, body)                               // cache body是为了trace使用
+	c.ctx.Request.Body = io.NopCloser(bytes.NewBuffer(body)) // re-construct req body
 }
 
 // ShouldBindQuery 反序列化querystring
