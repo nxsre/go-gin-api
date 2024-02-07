@@ -15,7 +15,6 @@ import (
 	"github.com/99designs/gqlgen/graphql/handler/extension"
 	"github.com/99designs/gqlgen/graphql/handler/lru"
 	"github.com/99designs/gqlgen/graphql/handler/transport"
-	"github.com/99designs/gqlgen/graphql/playground"
 	"go.uber.org/zap"
 )
 
@@ -95,7 +94,7 @@ func (g *gql) Query() core.HandlerFunc {
 }
 
 func (g *gql) Playground() core.HandlerFunc {
-	h := playground.Handler("GraphQL", "/graphql/query")
+	h := Handler("GraphQL", "/graphql/query")
 	return func(c core.Context) {
 		h.ServeHTTP(c.ResponseWriter(), c.Request())
 	}
