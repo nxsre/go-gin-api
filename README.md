@@ -28,7 +28,7 @@
 
 ## 文档索引（可加入交流群）
 
-- 中文文档：[go-gin-api - 语雀](https://www.yuque.com/nxsre/go-gin-api/ngc3x5)
+- 中文文档：[go-gin-api - 语雀](https://www.yuque.com/xinliangnote/go-gin-api/ngc3x5)
 - English Document：[en.md](https://github.com/nxsre/go-gin-api/blob/master/en.md)
 
 
